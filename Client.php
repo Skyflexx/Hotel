@@ -16,6 +16,10 @@ class Client {
 
     }
 
+    public function __tostring(){
+        return $this->firstname." ".$this->lastname;
+    }
+
 
 
 

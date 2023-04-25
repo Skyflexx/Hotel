@@ -13,13 +13,12 @@ class Room{
 
     public function __construct(int $nbrBed, bool $wifi , float $price, Hotel $hotel){    
 
-    $this->numRoom = $hotel->createNumRoom(); // On va créer une fct qui ira créer le numéro de chambre en se basant sur l'array Rooms.
+    $this->numRoom = $hotel->createNumRoom(); // Utilisation de la fct createnumroom qui attribue un numéro de chambre à la création d'une chambre dans un hotel.
     $this->nbrBed = $nbrBed;
     $this->wifi = $wifi;
     $this->price = $price;
     $this->hotel = $hotel;
-    $this->available = true;
-    
+    $this->available = true;    
     $this->reservations = array(); // Ce tableau contiendra tous les items de type réservation(hotel1, chambre1, client1) permettant de sortir toutes les résas de cette chambre précise.
 
     $hotel->addRoom($this); // Appel de la fct AddRoom qui permettra d'ajouter cette chambre à la liste de l'hotel concerné.
@@ -35,18 +34,25 @@ class Room{
     
     }
 
-    public function setNumRoom() // A utiliser via hotel. 
-    {
-        $this->numRoom = $numRoom;
-
-        return $this;
+    public function getRoomsStatus(){
+        return $this." ".$this->price." € ". "Wifi :".$this->getStatutWifi()." Statut chambre : ".$this->getAvailability();
     }
 
-    
+    public function getAvailability(){
+        if ($this->available == true){
+            return "Disponible !";
+        } else return "Réservée";
+    }
 
-    // public function __tostring (){  // Retournera le numéro de chambre et le wifi si oui ou non.
-    //     return $this->
-    // }
+    public function getStatutwifi(){
+        if ($this->wifi == true){
+            return " Oui ";
+        } else return " Non ";
+    }    
+
+    public function __tostring (){  // Retournera le numéro de chambre 
+        return "Chambre ".$this->getNumRoom();
+    }
 
 
 
@@ -130,6 +136,14 @@ class Room{
     {
         return $this->numRoom;
     }
+
+    public function setNumRoom() 
+    {
+        $this->numRoom = $numRoom;
+
+        return $this;
+    }
+
 
    
     
