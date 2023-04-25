@@ -61,9 +61,11 @@ class Hotel {
         count($this->reservations)." Réservations";
 
         foreach ($this->reservations as $reservation){
-            $dateDeb = $reservation->getDate->format("Y-m-d");
 
-            return $reservation->getClient()." - ".$reservation->getroom()." - ".$dateDeb;
+            $dateBegin = $reservation->getBegin()->format("Y-m-d");
+            $dateEnd = $reservation->getEnd()->format("Y-m-d");
+
+            return $reservation->getClient()." - ".$reservation->getroom()." - "."Du : $dateBegin au $dateEnd";
         }
 
         return $infos;

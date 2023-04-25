@@ -73,6 +73,34 @@ Class Reservation{
 
         return $this;
     }
+
+   
+    public function getBegin()
+    {
+        return $this->begin;
+    }
+
+  
+    public function setBegin($begin)
+    {
+        $this->begin = $begin;
+
+        return $this;
+    }
+
+   
+    public function getEnd()
+    {
+        return $this->end;
+    }
+
+    
+    public function setEnd($end)
+    {
+        $this->end = $end;
+
+        return $this;
+    }
 }
 
 ?>
