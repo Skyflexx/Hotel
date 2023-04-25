@@ -28,11 +28,6 @@ Class Reservation{
 
 // On pourra éventuellement ajouter une fonction qui, selon la date du jour via une comparaison entre la date de fin et la date du jour, pourra remettre la chambre en disponible.
 
-    // public function getInfosResa(){
-    //     return $this->$client." ".$this->$room;
-    // }
-
-
     public function getHotel()
     {
         return $this->hotel;

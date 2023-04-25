@@ -9,43 +9,35 @@
 <body>
 
 
-<?php 
+    <?php 
 
-spl_autoload_register(function ($class_name) {
-    include $class_name . '.php';
-});
-
-$hilton = new Hotel("Hilton ****", "10 Route de la Gare", "67000", "Strasbourg");
-
-$room1 = new Room (3, false, 120, $hilton);
-$room2 = new Room (4, false, 120, $hilton);
-
-$client1 = new Client ("Mickael", "Murmann");
+        spl_autoload_register(function ($class_name) {
+            include $class_name . '.php';
+        });
 
 
+        // Instanciations
 
-$resa1 = new Reservation ($hilton, $room2, $client1, "03/11/2021", "03/15/2021");
+        $hilton = new Hotel("Hilton ****", "10 Route de la Gare", "67000", "Strasbourg");
 
+        $room1 = new Room (3, false, 120, $hilton);
+        $room2 = new Room (4, false, 120, $hilton);
 
+        $client1 = new Client ("Mickael", "Murmann");
 
-
-
-
-
-echo $hilton->getInfosHotel();
-
-echo "<br>";
-
-echo $hilton->getReservationsList();
+        $resa1 = new Reservation ($hilton, $room2, $client1, "03/11/2021", "03/15/2021");
 
 
+        // Tests des fonctions
 
+        echo $hilton->getInfosHotel();
 
+        echo "<br>";
+        echo "<br>";
 
+        echo $hilton->getReservationsList();
 
-
-
-?>
+    ?>
     
 </body>
 </html>

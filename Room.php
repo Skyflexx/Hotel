@@ -6,22 +6,21 @@ class Room{
     private int $nbrBed;
     private float $price;
     private bool $wifi; // Si oui ou non le wifi.
-    private Hotel $hotel; // Une chambre liée à un hotel.
-
-    private array $reservations;
+    private Hotel $hotel; // Une chambre liée à un hotel.    
     private bool $available; // Booléen pour savoir si cette chambre est dispo ou non. Par défaut True à la création. 
+    private array $reservations; // Array Réservations qui contient chaque réservation de l'hôtel
 
     public function __construct(int $nbrBed, bool $wifi , float $price, Hotel $hotel){    
 
-    $this->numRoom = $hotel->createNumRoom(); // Utilisation de la fct createnumroom qui attribue un numéro de chambre à la création d'une chambre dans un hotel.
-    $this->nbrBed = $nbrBed;
-    $this->wifi = $wifi;
-    $this->price = $price;
-    $this->hotel = $hotel;
-    $this->available = true;    
-    $this->reservations = array(); // Ce tableau contiendra tous les items de type réservation(hotel1, chambre1, client1) permettant de sortir toutes les résas de cette chambre précise.
+        $this->numRoom = $hotel->createNumRoom(); // Utilisation de la fct createnumroom qui attribue un numéro de chambre à la création d'une chambre dans un hotel.
+        $this->nbrBed = $nbrBed;
+        $this->wifi = $wifi;
+        $this->price = $price;
+        $this->hotel = $hotel;
+        $this->available = true;    
+        $this->reservations = array(); // Ce tableau contiendra tous les items de type réservation(hotel1, chambre1, client1) permettant de sortir toutes les résas de cette chambre précise.
 
-    $hotel->addRoom($this); // Appel de la fct AddRoom qui permettra d'ajouter cette chambre à la liste de l'hotel concerné.
+        $hotel->addRoom($this); // Appel de la fct AddRoom qui permettra d'ajouter cette chambre à la liste de l'hotel concerné.
 
     }
 
@@ -54,28 +53,7 @@ class Room{
         return "Chambre ".$this->getNumRoom();
     }
 
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// GETTERS ET SETTERS
 
     public function getHotel()
     {

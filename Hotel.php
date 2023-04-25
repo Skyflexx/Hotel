@@ -53,19 +53,24 @@ class Hotel {
 
     }
 
-    public function getReservationsList(){  
+    public function getReservationsList(){   
+        
+        $nbResa = count($this->reservations);
+        
+        $infos = "Réservations de l'hotel $this <br> $nbResa ";
 
+        if ($nbResa == 1){
+            $infos .= "Réservation <br>";
+        } else $infos .= "Réservations <br>";
         
-        
-        $infos = "Réservations de l'hotel $this <br>". 
-        count($this->reservations)." Réservations";
+        // Récupération des données depuis l'array Réservations qui contient des objets
 
         foreach ($this->reservations as $reservation){
 
-            $dateBegin = $reservation->getBegin()->format("Y-m-d");
-            $dateEnd = $reservation->getEnd()->format("Y-m-d");
+            $dateBegin = $reservation->getBegin()->format("Y-m-d"); // Récupération de la date de début de la resa
+            $dateEnd = $reservation->getEnd()->format("Y-m-d"); // Récupération de la date de fin
 
-            return $reservation->getClient()." - ".$reservation->getroom()." - "."Du : $dateBegin au $dateEnd";
+            $infos .= $reservation->getClient()." - ".$reservation->getroom()." - "."Du : $dateBegin au $dateEnd"; 
         }
 
         return $infos;
@@ -77,30 +82,8 @@ class Hotel {
         return $this->name." ".$this->city;
     }
 
-    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    // GETTERS ET SETTERS
      
     public function getName()
     {
