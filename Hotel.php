@@ -57,11 +57,13 @@ class Hotel {
         
         $nbResa = count($this->reservations);
         
-        $infos = "Réservations de l'hotel $this <br> $nbResa ";
+        $infos = "Réservations de l'hotel $this <br>  ";
 
-        if ($nbResa == 1){
-            $infos .= "Réservation <br>";
-        } else $infos .= "Réservations <br>";
+        if ($nbResa == 0){
+            $infos .= "Aucune réservation ! <br>";
+        } else if ($nbResa == 1){
+            $infos .= "$nbResa Réservation <br>";
+        } else $infos .= "$nbResa Réservations <br>";
         
         // Récupération des données depuis l'array Réservations qui contient des objets
 
@@ -70,10 +72,73 @@ class Hotel {
             $dateBegin = $reservation->getBegin()->format("Y-m-d"); // Récupération de la date de début de la resa
             $dateEnd = $reservation->getEnd()->format("Y-m-d"); // Récupération de la date de fin
 
-            $infos .= $reservation->getClient()." - ".$reservation->getroom()." - "."Du : $dateBegin au $dateEnd"; 
+            $infos .= $reservation->getClient()." - ".$reservation->getroom()." - "."Du : $dateBegin au $dateEnd <br>"; 
         }
 
+        $infos .= "<br>";
+
         return $infos;
+
+    }
+
+    public function getStatutRoom(){ // Affichage en bootstrap de la liste des chambres et leurs features dans l'hotel.
+
+        // $content représente le contenu qui sera affiché en boostrap.
+        // Dans un 1er temps on ajoute à $content les différentes colonnes de la table.
+
+        $content = "
+            <table class='table table-white'>
+            <thead>
+            <tr>
+            
+            <th scope='col'>Chambre</th>
+            <th scope='col'>Prix</th>
+            <th scope='col'>Wifi</th>
+            <th scope='col'>Etat</th>
+            </tr>
+            </thead>
+            <tbody>
+        ";
+
+        // Dans un second temps, insertion des lignes en parcourant l'array Rooms qui contient les objets Room.
+
+        foreach ($this->rooms as $room){
+
+            // contitionnel pour sortir un logo wifi en bootstrap.
+
+            if ($room->getWifi()){
+                $wifi = "<i class='fa-solid fa-wifi'></i>";
+            } else {
+                $wifi = "";
+            }
+
+            // Conditionnel pour sortir une étiquette disponible ou indisponible en bootstrap.
+
+            if ($room->getAvailable()){
+                $availability = "<span class='label label-success'>Disponible !</span>";
+            } else {
+                $availability = "<span class='label label-danger'>Indisponible</span>";
+            }
+
+            // Afichage du contenu dans un tableau bootstrap.
+
+            $content.= 
+            "<tr>".
+                "<th scope='row'>$room</th>".
+                "<td>".$room->getPrice()."€</td>".
+                "<td>".$wifi."</td>".
+                "<td>".$availability."</td>
+            </tr>";
+
+        }
+
+        // Dans un 3e temps, fermeture du tableau.
+
+        $content.= 
+        "</tbody>
+        </table>";
+
+        return $content; 
 
     }
 

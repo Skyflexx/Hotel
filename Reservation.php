@@ -25,8 +25,18 @@ Class Reservation{
 
     }
 
+    public function calculPrice(){ // Calcul du prix d'une resa en partant du nbr de jours réservés. 
 
-// On pourra éventuellement ajouter une fonction qui, selon la date du jour via une comparaison entre la date de fin et la date du jour, pourra remettre la chambre en disponible.
+        $stayDuration = $this->begin->diff($this->end); // Calcul du nb de jours. Si == 0 en cas d'1 jours de resa, alors on sort juste le prix de la chambre.
+
+        if ($stayDuration->d == 0) {
+
+            $price = $this->getRoom()->getPrice();
+
+        } else $price = $this->getRoom()->getPrice() * $stayDuration->d; // Sinon, multiplication par le nbr de jour sinon ça ferait une multiplication par 0.
+
+        return $price ;
+    }
 
     public function getHotel()
     {
