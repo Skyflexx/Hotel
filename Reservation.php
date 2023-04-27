@@ -7,24 +7,72 @@ Class Reservation{
     private Client $client;
     private Datetime $begin; //date de début de résa
     private Datetime $end; // date de fin de la résa
+    private array $period;
 
     public function __construct(Room $room, Client $client, string $begin, string $end){
 
-        $hotel = $room->getHotel();
-
-        
         $this->room = $room;
         $this->client = $client;
-
         $this->begin = new Datetime ($begin);
         $this->end = new Datetime ($end);
-       
-        $hotel->addResa($this);
-        $room->addResa($this); // On ajoute la réservation automatiquement à un tableau Résas pour chaque chambre afin d'avoir un suivi des résas pour une chambre.       
-        $client->addResa($this); // On ajoute cet objet à la liste des Réservations(hoel, chambre) du client. Un client peut avoir +ieurs résa
+        $this->period = []; // Tableau vide qui contiendra la période de réservation (chaque jour sous forme de date dans un tableau)
+        
 
-        $room->changeAvailable(); // Appel de la fct qui fera passer la chambre en innacessible
-    }
+        $hotel = $room->getHotel(); // Récupération de l'objet Hotel depuis Room (construct). Car une réservation se fait qu'avec une chambre et un client. L'hotel est tacitement lié.        
+
+        $this->createDatePeriod(); // fonctionnel      
+        
+        foreach ($room->getPeriods() as $period){
+
+            $result = array_intersect($period, $this->period); // Sort les items égaux entre 2 tableaux.
+
+            var_dump($result);
+
+            if (empty($result)){
+
+                $hotel->addResa($this); // Ajout de l'objet resa au tableau des réservations de l'hôtel.       
+                $room->addResa($this); // On ajoute la réservation automatiquement à un tableau Résas pour chaque chambre afin d'avoir un suivi des résas pour une chambre.       
+                $client->addResa($this); // On ajoute cet objet à la liste des Réservations(hoel, chambre) du client. Un client peut avoir +ieurs résa
+                $room->changeAvailable(); // Appel de la fct qui fera passer la chambre en innacessible 
+                $room->addPeriodOfResa($this->period);
+
+            } else echo "Impossible de réserver";
+
+        }
+        
+    }      
+
+    // public function isReservable(){
+
+    //     foreach ($this->room->getPeriods() as $period){
+
+    //         $result = array_intersect($period, $this->period); // Sort les items égaux entre 2 tableaux.
+
+    //         if (empty($result)){
+    //             $hotel->addResa($this); // Ajout de l'objet resa au tableau des réservations de l'hôtel.       
+    //             $room->addResa($this); // On ajoute la réservation automatiquement à un tableau Résas pour chaque chambre afin d'avoir un suivi des résas pour une chambre.       
+    //             $client->addResa($this); // On ajoute cet objet à la liste des Réservations(hoel, chambre) du client. Un client peut avoir +ieurs résa
+                
+    //             $room->changeAvailable(); // Appel de la fct qui fera passer la chambre en innacessible 
+    //         } else echo "Impossible de réserver";
+
+    //     }
+    // }
+
+    public function createDatePeriod(){
+        
+        $interval = new DateInterval('P1D');
+        $period = new DatePeriod($this->begin, $interval, $this->end);
+        
+
+        foreach ($period as $date) {
+            $this->period[] = $date->format('Y-m-d');  // l' array qui contiendra la période de réservation. Chaque jour sous forme de date dans un item du tableau.      
+        }     
+        
+        $this->period[] = $this->end->format('Y-m-d'); // On ajoute la date End car DatePeriod n'inclu pas la end date.... 
+       
+    }  
+
 
     public function calculPrice(){ // Calcul du prix d'une resa en partant du nbr de jours réservés. 
 
@@ -39,20 +87,7 @@ Class Reservation{
         return $price ;
     }
 
-    // public function getHotel()
-    // {
-    //     return $this->hotel;
-    // }
 
-
-    // public function setHotel($hotel)
-    // {
-    //     $this->hotel = $hotel;
-
-    //     return $this;
-    // }
-
-  
     public function getRoom()
     {
         return $this->room;
@@ -104,6 +139,20 @@ Class Reservation{
     public function setEnd($end)
     {
         $this->end = $end;
+
+        return $this;
+    }
+
+   
+    public function getPeriod()
+    {
+        return $this->period;
+    }
+
+   
+    public function setPeriod($period)
+    {
+        $this->period = $period;
 
         return $this;
     }

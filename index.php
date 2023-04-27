@@ -33,9 +33,10 @@
         $client1 = new Client ("Mickael", "Murmann");
         $client2 = new Client ("Virgile", "Gibello");
 
-        $resa1 = new Reservation ($room2, $client1, "03/11/2021", "03/15/2021");
-        $resa2 = new Reservation ($room1, $client1, "04/01/2021", "04/02/2021");
+        $resa1 = new Reservation ($room1, $client1, "03/11/2021", "03/15/2021");
+        $resa2 = new Reservation ($room1, $client1, "03/16/2021", "03/18/2021");
         $resa3 = new Reservation ($room2, $client2, "01/01/2021", "01/01/2021");
+       
 
         // Tests des fonctions
 
@@ -51,6 +52,41 @@
         echo $client1->getReservationsList();        
 
         echo $hilton->getStatutRoom();
+
+        // Probleme en cours :
+
+        // Lors de l'instanciation d'une réservation, on doit pouvoir comparer la période demandée aux périodes en cours situées dans un array dans l'objet room. 
+        
+
+
+
+
+
+        // $interval = new DateInterval('P1D');
+        // $period = new DatePeriod($resa1->getBegin(), $interval, $resa1->getEnd());
+        // $period2 = new DatePeriod($resa2->getBegin(), $interval, $resa2->getEnd());
+
+        // $periode1[] = $resa1->getBegin()->format("Y-m-d");
+        // $periode2[] = $resa2->getBegin()->format("Y-m-d");
+        
+
+        // foreach ($period as $date) {
+        //     $periode1[] = $date->format('Y-m-d');  // Création d'un array qui contiendra la période de réservation. Chaque jour sous forme de date dans un item du tableau.      
+        // }
+
+        // foreach ($period2 as $date) {
+        //     $periode2[] = $date->format('Y-m-d');  // Création d'un array qui contiendra la période de réservation. Chaque jour sous forme de date dans un item du tableau.      
+        // }               
+
+        // $result = array_intersect($periode1, $periode2); // Sort les items égaux entre 2 tableaux.
+
+        // var_dump($result);
+
+        // if (empty($result)){
+        //     echo "possible de réserver";
+        // } else echo "Impossible de réserver";
+
+       
 
     ?>
 

@@ -9,6 +9,7 @@ class Room{
     private Hotel $hotel; // Une chambre liée à un hotel.    
     private bool $available; // Booléen pour savoir si cette chambre est dispo ou non. Par défaut True à la création. 
     private array $reservations; // Array Réservations qui contient chaque réservation de l'hôtel
+    private array $periods; // array contenant toutes les periodes de Resa de cette chambre.
 
     public function __construct(int $nbrBed, bool $wifi , float $price, Hotel $hotel){    
 
@@ -19,13 +20,21 @@ class Room{
         $this->hotel = $hotel;
         $this->available = true;    
         $this->reservations = array(); // Ce tableau contiendra tous les items de type réservation(hotel1, chambre1, client1) permettant de sortir toutes les résas de cette chambre précise.
+        $this->periods = array();
 
         $hotel->addRoom($this); // Appel de la fct AddRoom qui permettra d'ajouter cette chambre à la liste de l'hotel concerné.
 
+    }    
+
+    public function addPeriodOfResa($period){
+        
+        $this->periods[] = $period; // ajout de la période qui sera sous forme d'array contenant des dates.
     }
 
-    public function addResa($reservation){
+    public function addResa($reservation){  
+
         $this->reservations[] = $reservation; // Ajout de la réservation (Hotel, chambre, client) à ce tableau ce qui permettra de sortir toutes les resa de l'hotel.
+
     }
 
     public function changeAvailable(){
@@ -52,6 +61,9 @@ class Room{
     public function __tostring (){  // Retournera le numéro de chambre 
         return "Chambre ".$this->getNumRoom();
     }
+
+
+    
 
 // GETTERS ET SETTERS
 
@@ -131,6 +143,34 @@ class Room{
     public function setAvailable($available)
     {
         $this->available = $available;
+
+        return $this;
+    }
+
+   
+    public function getReservations()
+    {
+        return $this->reservations;
+    }
+
+    
+    public function setReservations($reservations)
+    {
+        $this->reservations = $reservations;
+
+        return $this;
+    }
+
+   
+    public function getPeriods()
+    {
+        return $this->periods;
+    }
+
+    
+    public function setPeriods($periods)
+    {
+        $this->periods = $periods;
 
         return $this;
     }
