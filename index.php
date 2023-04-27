@@ -26,7 +26,7 @@
 
         $room1 = new Room (3, true, 120, $hilton);
         $room2 = new Room (4, false, 120, $hilton);
-        $room3 = new Room (2, false, 130, $hilton);
+        $room3 = new Room (2, true, 130, $hilton);
 
         $client1 = new Client ("Mickael", "Murmann");
         $client2 = new Client ("Virgile", "Gibello");

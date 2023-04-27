@@ -29,7 +29,7 @@ class Room{
     }
 
     public function changeAvailable(){
-        $this->available = !$this->available; // Changement automatique du statut dispo si une réservation est faite.
+        $this->available = false; // Changement automatique du statut dispo si une réservation est faite.
     
     }
 
