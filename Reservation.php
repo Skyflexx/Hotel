@@ -2,24 +2,27 @@
 
 Class Reservation{
 
-    private Hotel $hotel;
+    
     private Room $room;
     private Client $client;
     private Datetime $begin; //date de début de résa
     private Datetime $end; // date de fin de la résa
 
-    public function __construct(Hotel $hotel, Room $room, Client $client, string $begin, string $end){
+    public function __construct(Room $room, Client $client, string $begin, string $end){
 
-        $this->hotel = $hotel;
+        $hotel = $room->getHotel();
+
+        
         $this->room = $room;
         $this->client = $client;
 
         $this->begin = new Datetime ($begin);
         $this->end = new Datetime ($end);
        
-        $hotel->addResa($this); // Un hotel pourra lister les réservations.
+        $hotel->addResa($this);
         $room->addResa($this); // On ajoute la réservation automatiquement à un tableau Résas pour chaque chambre afin d'avoir un suivi des résas pour une chambre.       
         $client->addResa($this); // On ajoute cet objet à la liste des Réservations(hoel, chambre) du client. Un client peut avoir +ieurs résa
+
         $room->changeAvailable(); // Appel de la fct qui fera passer la chambre en innacessible
     }
 
@@ -36,18 +39,18 @@ Class Reservation{
         return $price ;
     }
 
-    public function getHotel()
-    {
-        return $this->hotel;
-    }
+    // public function getHotel()
+    // {
+    //     return $this->hotel;
+    // }
 
 
-    public function setHotel($hotel)
-    {
-        $this->hotel = $hotel;
+    // public function setHotel($hotel)
+    // {
+    //     $this->hotel = $hotel;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
   
     public function getRoom()

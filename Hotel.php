@@ -1,5 +1,9 @@
 <?php
 
+// Ajouter fct si chambre réservée on ne peut pas la réserver.
+// Ajouter fct où je peux annuler la resa et ça repasse en dispo.
+// Annuler une resa refresh le tableau d'affichage.
+
 class Hotel {
 
     private string $name;
@@ -67,7 +71,7 @@ class Hotel {
         
         // Récupération des données depuis l'array Réservations qui contient des objets
 
-        foreach ($this->reservations as $reservation){
+        foreach ($this->reservations as $reservation){            
 
             $dateBegin = $reservation->getBegin()->format("Y-m-d"); // Récupération de la date de début de la resa
             $dateEnd = $reservation->getEnd()->format("Y-m-d"); // Récupération de la date de fin

@@ -14,7 +14,6 @@ class Client {
 
     }
 
-
     public function __tostring(){
         return $this->firstname." ".$this->lastname;
     }
@@ -44,7 +43,7 @@ class Client {
             $dateBegin = $reservation->getBegin()->format("Y-m-d"); // Récupération de la date de début de la resa
             $dateEnd = $reservation->getEnd()->format("Y-m-d"); // Récupération de la date de fin
 
-            $infos .= $reservation->getHotel()." / ".$reservation->getroom()." (".$reservation->getroom()->getNbrBed()." lits - ".$reservation->getroom()->getPrice(). " € - Wifi : ".$reservation->getroom()->getStatutwifi().") - "."Du : $dateBegin au $dateEnd <br>"; 
+            $infos .= $reservation->getRoom()->getHotel()." / ".$reservation->getroom()." (".$reservation->getroom()->getNbrBed()." lits - ".$reservation->getroom()->getPrice(). " € - Wifi : ".$reservation->getroom()->getStatutwifi().") - "."Du : $dateBegin au $dateEnd <br>"; 
             
             $priceTotal += $reservation->calculPrice(); // Appel de la fct calculPrice de l'objet Reservation qui calcule en fct du nbr de jours passés.
         }

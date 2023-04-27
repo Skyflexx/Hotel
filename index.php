@@ -10,7 +10,7 @@
     <title>Hotels</title>
 </head>
 <body>
-
+<h2>
 
     <?php 
 
@@ -26,14 +26,16 @@
         $room1 = new Room (3, true, 120, $hilton);
         $room2 = new Room (4, false, 120, $hilton);
         $room3 = new Room (2, true, 130, $hilton);
+        $room4 = new Room (2, true, 130, $hilton);
+        $room5 = new Room (2, true, 130, $hilton);
+        $room6 = new Room (2, true, 130, $hilton);
 
         $client1 = new Client ("Mickael", "Murmann");
         $client2 = new Client ("Virgile", "Gibello");
 
-        $resa1 = new Reservation ($hilton, $room2, $client1, "03/11/2021", "03/15/2021");
-        $resa2 = new Reservation ($hilton, $room1, $client1, "04/01/2021", "04/02/2021");
-        $resa3 = new Reservation ($hilton, $room2, $client2, "01/01/2021", "01/01/2021");
-
+        $resa1 = new Reservation ($room2, $client1, "03/11/2021", "03/15/2021");
+        $resa2 = new Reservation ($room1, $client1, "04/01/2021", "04/02/2021");
+        $resa3 = new Reservation ($room2, $client2, "01/01/2021", "01/01/2021");
 
         // Tests des fonctions
 
@@ -51,6 +53,8 @@
         echo $hilton->getStatutRoom();
 
     ?>
+
+    </h2>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
