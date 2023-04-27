@@ -18,7 +18,6 @@
             include $class_name . '.php';
         });
 
-
         // Instanciations
 
         $hilton = new Hotel("Hilton ****", "10 Route de la Gare", "67000", "Strasbourg");
@@ -47,17 +46,9 @@
 
         echo $regent->getReservationsList();
 
-        echo $client1->getReservationsList();
+        echo $client1->getReservationsList();        
 
-
-        // $begin = new Datetime("03/11/2021");
-        // $end = new Datetime ("03/15/2021");
-
-        // $stayDuration = $begin->diff($end);
-
-        // echo $stayDuration->d;
-
-      echo $hilton->getStatutRoom();
+        echo $hilton->getStatutRoom();
 
     ?>
 
