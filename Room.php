@@ -28,9 +28,13 @@ class Room{
 
     public function isPossibleToResa($periodResa){ // Periode depuis Resa
 
-        foreach ($this->periods as $periode){
+        // ERREUR ICI LES TABLEAUX NE DOIVENT PAS ETRE LES BONS
 
-            $result = array_intersect($periodResa, $periode); // Sort les items égaux entre 2 tableaux.            
+        foreach ($this->periods as $periode){             
+
+            $result = array_intersect($periodResa, $periode); // Sort les items égaux entre 2 tableaux.
+            
+            var_dump($result);
 
             if (empty($result)){
                 

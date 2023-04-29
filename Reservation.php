@@ -20,14 +20,16 @@ Class Reservation{
 
         $this->createDatePeriod(); // fonctionnel 
 
+        $room->addPeriodOfResa($this->period);
+        $hotel->addResa($this); // Ajout de l'objet resa au tableau des réservations de l'hôtel.       
+        $room->addResa($this); // On ajoute la réservation automatiquement à un tableau Résas pour chaque chambre afin d'avoir un suivi des résas pour une chambre.       
+        $client->addResa($this); // On ajoute cet objet à la liste des Réservations(hoel, chambre) du client. Un client peut avoir +ieurs résa
+        $room->changeAvailable(); // Appel de la fct qui fera passer la chambre en innacessible 
+
        
         if ($room->isPossibleToResa($this->period)){
 
-            $room->addPeriodOfResa($this->period);
-            $hotel->addResa($this); // Ajout de l'objet resa au tableau des réservations de l'hôtel.       
-            $room->addResa($this); // On ajoute la réservation automatiquement à un tableau Résas pour chaque chambre afin d'avoir un suivi des résas pour une chambre.       
-            $client->addResa($this); // On ajoute cet objet à la liste des Réservations(hoel, chambre) du client. Un client peut avoir +ieurs résa
-            // $room->changeAvailable(); // Appel de la fct qui fera passer la chambre en innacessible 
+           
     
             
             echo "Possible de réserver";
