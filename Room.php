@@ -26,6 +26,23 @@ class Room{
 
     }    
 
+    public function isPossibleToResa($periodResa){ // Periode depuis Resa
+
+        foreach ($this->periods as $periode){
+
+            $result = array_intersect($periodResa, $periode); // Sort les items égaux entre 2 tableaux.            
+
+            if (empty($result)){
+                
+                return true;               
+
+            } else             
+            
+            return false;
+
+        }
+    }
+
     public function addPeriodOfResa($period){
         
         $this->periods[] = $period; // ajout de la période qui sera sous forme d'array contenant des dates.
