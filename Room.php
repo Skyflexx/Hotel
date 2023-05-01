@@ -22,16 +22,13 @@ class Room{
         $this->reservations = array(); // Ce tableau contiendra tous les items de type réservation(hotel1, chambre1, client1) permettant de sortir toutes les résas de cette chambre précise.
         $hotel->addRoom($this); // Appel de la fct AddRoom qui permettra d'ajouter cette chambre à la liste de l'hotel concerné.       
 
-    }       
+    }      
+   
 
     public function addResa($reservation){  
 
         $this->reservations[] = $reservation; // Ajout de la réservation (Hotel, chambre, client) à ce tableau ce qui permettra de sortir toutes les resa de l'hotel.
 
-    }
-
-    public function delResa(){ // Supprime la dernière réservation.
-        array_pop($this->reservations);
     }    
 
     public function changeAvailable(){
@@ -53,7 +50,8 @@ class Room{
         if ($this->wifi == true){
             return " Oui ";
         } else return " Non ";
-    }    
+    }  
+
 
     public function __tostring (){  // Retournera le numéro de chambre 
         return "Chambre ".$this->getNumRoom();
@@ -156,21 +154,8 @@ class Room{
         $this->reservations = $reservations;
 
         return $this;
-    }
-
-   
-    public function getPeriods()
-    {
-        return $this->periods;
-    }
-
+    }   
     
-    public function setPeriods($periods)
-    {
-        $this->periods = $periods;
-
-        return $this;
-    }
 }
 
 ?>
