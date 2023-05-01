@@ -30,7 +30,7 @@ Class Reservation{
 
     public function checkIfPossibleToResa(){ 
         
-         // PROBLEME : LA 1ERE RESA EST DELETE....
+         // PROBLEME : LA 2e resa ECRASE LA PREMIERE EN CAS DE DOUBLON
 
         $interval = new DateInterval('P1D');
         $period = new DatePeriod($this->begin, $interval, $this->end);

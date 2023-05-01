@@ -34,9 +34,9 @@
         $client2 = new Client ("Virgile", "Gibello");
 
         $resa1 = new Reservation ($room1, $client1, "03/11/2021", "03/14/2021");
-        $resa2 = new Reservation ($room1, $client1, "03/14/2021", "03/18/2021");
-        $resa3 = new Reservation ($room2, $client2, "01/01/2021", "01/01/2021");
-        $resa4 = new Reservation ($room2, $client2, "01/02/2021", "01/03/2021");      
+        $resa2 = new Reservation ($room1, $client1, "03/15/2021", "03/18/2021");
+        // $resa3 = new Reservation ($room2, $client2, "01/01/2021", "01/01/2021");
+        // $resa4 = new Reservation ($room2, $client2, "01/02/2021", "01/03/2021");      
        
 
         // Tests des fonctions
