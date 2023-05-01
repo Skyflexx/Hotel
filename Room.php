@@ -9,7 +9,7 @@ class Room{
     private Hotel $hotel; // Une chambre liée à un hotel.    
     private bool $available; // Booléen pour savoir si cette chambre est dispo ou non. Par défaut True à la création. 
     private array $reservations; // Array Réservations qui contient chaque réservation de l'hôtel
-    private array $periods; // array contenant toutes les periodes de Resa de cette chambre.
+    
 
     public function __construct(int $nbrBed, bool $wifi , float $price, Hotel $hotel){    
 
@@ -20,43 +20,19 @@ class Room{
         $this->hotel = $hotel;
         $this->available = true;    
         $this->reservations = array(); // Ce tableau contiendra tous les items de type réservation(hotel1, chambre1, client1) permettant de sortir toutes les résas de cette chambre précise.
-        $this->periods = array();
+        $hotel->addRoom($this); // Appel de la fct AddRoom qui permettra d'ajouter cette chambre à la liste de l'hotel concerné.       
 
-        $hotel->addRoom($this); // Appel de la fct AddRoom qui permettra d'ajouter cette chambre à la liste de l'hotel concerné.
-
-    }    
-
-    public function isPossibleToResa($periodResa){ // Periode depuis Resa
-
-        // ERREUR ICI LES TABLEAUX NE DOIVENT PAS ETRE LES BONS
-
-        foreach ($this->periods as $periode){             
-
-            $result = array_intersect($periodResa, $periode); // Sort les items égaux entre 2 tableaux.
-            
-            var_dump($result);
-
-            if (empty($result)){
-                
-                return true;               
-
-            } else             
-            
-            return false;
-
-        }
-    }
-
-    public function addPeriodOfResa($period){
-        
-        $this->periods[] = $period; // ajout de la période qui sera sous forme d'array contenant des dates.
-    }
+    }       
 
     public function addResa($reservation){  
 
         $this->reservations[] = $reservation; // Ajout de la réservation (Hotel, chambre, client) à ce tableau ce qui permettra de sortir toutes les resa de l'hotel.
 
     }
+
+    public function delResa(){ // Supprime la dernière réservation.
+        array_pop($this->reservations);
+    }    
 
     public function changeAvailable(){
         $this->available = false; // Changement automatique du statut dispo si une réservation est faite.

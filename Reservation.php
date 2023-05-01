@@ -18,47 +18,20 @@ Class Reservation{
         $this->period = array (); // Tableau vide qui contiendra la période de réservation (chaque jour sous forme de date dans un tableau)
         $hotel = $room->getHotel(); // Récupération de l'objet Hotel depuis Room (construct). Car une réservation se fait qu'avec une chambre et un client. L'hotel est tacitement lié.       
 
-        $this->createDatePeriod(); // fonctionnel 
+        $this->checkIfPossibleToResa(); // fonctionnel 
 
-        $room->addPeriodOfResa($this->period);
+        
         $hotel->addResa($this); // Ajout de l'objet resa au tableau des réservations de l'hôtel.       
         $room->addResa($this); // On ajoute la réservation automatiquement à un tableau Résas pour chaque chambre afin d'avoir un suivi des résas pour une chambre.       
         $client->addResa($this); // On ajoute cet objet à la liste des Réservations(hoel, chambre) du client. Un client peut avoir +ieurs résa
-        $room->changeAvailable(); // Appel de la fct qui fera passer la chambre en innacessible 
-
-       
-        if ($room->isPossibleToResa($this->period)){
-
-           
-    
-            
-            echo "Possible de réserver";
-
-        } else {
-            echo "Impossible de réserver";
-        }
+        $room->changeAvailable(); // Appel de la fct qui fera passer la chambre en innacessible        
               
-    }      
+    }     
 
-    // public function isReservable(){
-
-    //     foreach ($this->room->getPeriods() as $period){
-
-    //         $result = array_intersect($period, $this->period); // Sort les items égaux entre 2 tableaux.
-
-    //         if (empty($result)){
-    //             $hotel->addResa($this); // Ajout de l'objet resa au tableau des réservations de l'hôtel.       
-    //             $room->addResa($this); // On ajoute la réservation automatiquement à un tableau Résas pour chaque chambre afin d'avoir un suivi des résas pour une chambre.       
-    //             $client->addResa($this); // On ajoute cet objet à la liste des Réservations(hoel, chambre) du client. Un client peut avoir +ieurs résa
-                
-    //             $room->changeAvailable(); // Appel de la fct qui fera passer la chambre en innacessible 
-    //         } else echo "Impossible de réserver";
-
-    //     }
-    // }
-
-    public function createDatePeriod(){ // fonctionnel, ressort bien tous les tableaux par résa.
+    public function checkIfPossibleToResa(){ 
         
+         // PROBLEME : LA 1ERE RESA EST DELETE....
+
         $interval = new DateInterval('P1D');
         $period = new DatePeriod($this->begin, $interval, $this->end);
         
@@ -70,9 +43,28 @@ Class Reservation{
         $this->period[] = $this->end->format('Y-m-d');
         
         // On ajoute la date End car DatePeriod n'inclu pas la end date.... 
+
+        foreach ($this->room->getReservations() as $reservation){            
+
+            $result = array_intersect($this->period, $reservation->getPeriod()); // Sort les items égaux entre 2 tableaux.            
+
+            if (empty($result)){                   
+                
+                echo "Chambre réservée";                              
+
+            } else { 
+            
+            echo "Pas possible frère";
+
+                $this->room->delResa();
+                $this->client->delResa();
+                $this->room->getHotel()->delResa();
+                
+            }
+
+        }        
        
     }  
-
 
     public function calculPrice(){ // Calcul du prix d'une resa en partant du nbr de jours réservés. 
 

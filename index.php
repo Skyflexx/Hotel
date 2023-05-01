@@ -23,7 +23,7 @@
         $hilton = new Hotel("Hilton ****", "10 Route de la Gare", "67000", "Strasbourg");
         $regent = new Hotel("Regent ***", "61 rue dauphine", "75006", "Paris");
 
-        $room1 = new Room (3, true, 120, $hilton);
+        $room1 = new Room (3, false, 120, $hilton);
         $room2 = new Room (4, false, 120, $hilton);
         $room3 = new Room (2, true, 130, $hilton);
         $room4 = new Room (2, true, 130, $hilton);
@@ -33,9 +33,10 @@
         $client1 = new Client ("Mickael", "Murmann");
         $client2 = new Client ("Virgile", "Gibello");
 
-        $resa1 = new Reservation ($room1, $client1, "03/11/2021", "03/15/2021");
-        $resa2 = new Reservation ($room1, $client1, "03/16/2021", "03/18/2021");
+        $resa1 = new Reservation ($room1, $client1, "03/11/2021", "03/14/2021");
+        $resa2 = new Reservation ($room1, $client1, "03/14/2021", "03/18/2021");
         $resa3 = new Reservation ($room2, $client2, "01/01/2021", "01/01/2021");
+        $resa4 = new Reservation ($room2, $client2, "01/02/2021", "01/03/2021");      
        
 
         // Tests des fonctions
@@ -53,6 +54,15 @@
 
         echo $hilton->getStatutRoom();
 
+       
+
+
+       
+    
+
+
+        
+
         // Probleme en cours :
 
         // Lors de l'instanciation d'une réservation, on doit pouvoir comparer la période demandée aux périodes en cours situées dans un array dans l'objet room. 
@@ -62,8 +72,8 @@
 
 
 
-        // $interval = new DateInterval('P1D');
-        // $period = new DatePeriod($resa1->getBegin(), $interval, $resa1->getEnd());
+        
+        
         // $period2 = new DatePeriod($resa2->getBegin(), $interval, $resa2->getEnd());
 
         // $periode1[] = $resa1->getBegin()->format("Y-m-d");

@@ -22,6 +22,11 @@ class Client {
         $this->reservations[] = $reservation; // Ajout de la réservation (Hotel, chambre, client) à ce tableau ce qui permettra de sortir toutes les resa de ce Client.
     }
 
+    public function delResa(){ // Supprime la dernière réservation.
+        array_pop($this->reservations);
+    }
+
+   
     public function getReservationsList(){   // Sort toutes les infos des réservations de ce client.
         
         $nbResa = count($this->reservations);
