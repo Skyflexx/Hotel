@@ -18,53 +18,62 @@ Class Reservation{
         $this->period = array (); // Tableau vide qui contiendra la période de réservation (chaque jour sous forme de date dans un tableau)
         $hotel = $room->getHotel(); // Récupération de l'objet Hotel depuis Room (construct). Car une réservation se fait qu'avec une chambre et un client. L'hotel est tacitement lié.       
 
-        $this->checkIfPossibleToResa(); // fonctionnel 
-
-        
-        $hotel->addResa($this); // Ajout de l'objet resa au tableau des réservations de l'hôtel.       
-        $room->addResa($this); // On ajoute la réservation automatiquement à un tableau Résas pour chaque chambre afin d'avoir un suivi des résas pour une chambre.       
-        $client->addResa($this); // On ajoute cet objet à la liste des Réservations(hoel, chambre) du client. Un client peut avoir +ieurs résa
-        $room->changeAvailable(); // Appel de la fct qui fera passer la chambre en innacessible        
+        // Méthodes pour éviter les doublons pour une chambre :
+        $this->addPeriod(); // Ajout de la période de réservation.
+        $this->ifPossibleResa(); // Si la période de réservation n'empiete pas sur une autre, alors on réserve.        
               
-    }     
+    }    
 
-    public function checkIfPossibleToResa(){ 
-        
-         // PROBLEME : LA 2e resa ECRASE LA PREMIERE EN CAS DE DOUBLON
+    public function addPeriod(){
+
+        // Création de la période de réservation pour une date de début et une date de fin donnée. On stockera chaque date dans un array.
+        // L'idée c'est de comparer cet array aux autres des réservations déjà faites.
 
         $interval = new DateInterval('P1D');
-        $period = new DatePeriod($this->begin, $interval, $this->end);
-        
+        $period = new DatePeriod($this->begin, $interval, $this->end);        
 
         foreach ($period as $date) {
             $this->period[] = $date->format('Y-m-d');  // l' array qui contiendra la période de réservation. Chaque jour sous forme de date dans un item du tableau.      
         }     
         
-        $this->period[] = $this->end->format('Y-m-d');
+        $this->period[] = $this->end->format('Y-m-d');   // Ajout de la date de fin qui n'est pas incluse automatiquement par la classe DatePeriod.     
+
+    } 
+
+    public function ifPossibleResa(){ 
         
-        // On ajoute la date End car DatePeriod n'inclu pas la end date.... 
+        // Méthode permettant de vérifier si une résa est possible en comparant 2 tableaux et en sortant les occurences s'il y en a.
+        // Si il y a une date en commun, alors on arrête de parcourir le tableau et on return un false.
 
-        foreach ($this->room->getReservations() as $reservation){            
+        $isPossible = true; // Par défaut je mets isPossible à true.
 
-            $result = array_intersect($this->period, $reservation->getPeriod()); // Sort les items égaux entre 2 tableaux.            
+        foreach ($this->room->getReservations() as $reservation){ // On parcourt les réservations de la chambre concernée.
 
-            if (empty($result)){                   
-                
-                echo "Chambre réservée";                              
+            $check = array_intersect($this->period, $reservation->getPeriod()); // fct permettant de sortir les occurences entre 2 tableaux que je stocke dans $check.
 
-            } else { 
+            if(!empty($check)){ // la fct empty permet de retourner un booléen si la variable visée est vide. (par défaut true si empty.)
+
+                $isPossible = false; // Si pas vide, alors je passe isPossible à False.
+
+                break; // On sort si $check n'est pas vide. Sinon on risque au final de retourner un true si la réservation suivante n'a pas d'occurence.
+
+            } 
             
-            echo "Pas possible frère";
+        }
 
-                $this->room->delResa();
-                $this->client->delResa();
-                $this->room->getHotel()->delResa();
-                
-            }
+        if ($isPossible){ // Si isPossible est true, alors je peux créer la réservation et l'ajouter partout.
 
-        }        
-       
-    }  
+            $this->room->getHotel()->addResa($this); 
+            $this->room->addResa($this);        
+            $this->client->addResa($this); 
+            $this->room->changeAvailable(); 
+
+        } else {
+
+            echo "Impossible de réserver !";
+        }
+
+    }
 
     public function calculPrice(){ // Calcul du prix d'une resa en partant du nbr de jours réservés. 
 
