@@ -22,6 +22,17 @@ class Client {
         $this->reservations[] = $reservation; // Ajout de la réservation (Hotel, chambre, client) à ce tableau ce qui permettra de sortir toutes les resa de ce Client.
     }   
 
+    public function delResa($reservation){
+
+        var_dump($reservation);
+        $key = array_search($reservation, $this->reservations); // Cherche la clé de cette reservation
+        var_dump($key);
+        // unset($this->reservations[$key]);
+
+        
+        
+    }
+
    
     public function getReservationsList(){   // Sort toutes les infos des réservations de ce client.
         

@@ -22,7 +22,12 @@ Class Reservation{
         $this->addPeriod(); // Ajout de la période de réservation.
         $this->ifPossibleResa(); // Si la période de réservation n'empiete pas sur une autre, alors on réserve.        
               
-    }    
+    } 
+    
+    public function delResa(){
+        // $this->getRoom()->delResa($this);  
+        $this->getClient()->delResa($this);      
+    }
 
     public function addPeriod(){
 
