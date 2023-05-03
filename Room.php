@@ -31,6 +31,12 @@ class Room{
 
     }    
 
+    public function delResa($reservation){
+        $key = array_search($reservation, $this->reservations); // Cherche la clé de cette reservation
+        unset($this->reservations[$key]);
+        
+    }
+
     public function changeAvailable(){
         $this->available = false; // Changement automatique du statut dispo si une réservation est faite.
     
