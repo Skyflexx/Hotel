@@ -31,7 +31,8 @@ Class Reservation{
         $this->getRoom()->delResa($this);
         $this->getClient()->delResa($this);
         $this->room->getHotel()->delResa($this);
-        
+
+        return  "echo $"."hilton->getStatutRoom();"; // Ecrit une ligne de code permettant d'afficher à nouveau le tableau des réservations de l'hotel.        
       
     }
 

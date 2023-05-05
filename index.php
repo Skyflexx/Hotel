@@ -55,16 +55,20 @@
 
         echo $hilton->getStatutRoom();
 
-        
-        
+        echo "Suppression d'une réservation : <br><br>";
+
         $resa1->delResa();
 
-        echo $hilton->getStatutRoom();
+        echo $client1->getReservationsList();  
+
+        echo $hilton->getStatutRoom(); 
         
 
-    ?>
+    ?>    
 
     </h2>
+
+    
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

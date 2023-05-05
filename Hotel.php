@@ -97,9 +97,12 @@ class Hotel {
 
     public function getStatutRoom(){ // Affichage en bootstrap de la liste des chambres et leurs features dans l'hotel.
 
+        
+
         // $content représente le contenu qui sera affiché en boostrap.
         // Dans un 1er temps on ajoute à $content les différentes colonnes de la table.
 
+        
         $content = "
             <table class='table table-white'>
             <thead>
