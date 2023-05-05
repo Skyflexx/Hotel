@@ -31,15 +31,18 @@ class Room{
 
     }    
 
-    public function delResa($reservation){
-        $key = array_search($reservation, $this->reservations); // Cherche la clé de cette reservation
-        unset($this->reservations[$key]);
+    public function delResa($reservation){        
+        
+        $key = array_search($reservation, $this->reservations); // Cherche la clé de l'array Reservations de cette reservation
+        
+        unset($this->reservations[$key]); // Permet de supprimer l'item de l'array avec la clé concernée.
+
+        $this->available = true;        
         
     }
 
     public function changeAvailable(){
-        $this->available = false; // Changement automatique du statut dispo si une réservation est faite.
-    
+        $this->available = false; // Changement automatique du statut dispo si une réservation est faite.    
     }
 
     public function getRoomsStatus(){
@@ -62,8 +65,6 @@ class Room{
     public function __tostring (){  // Retournera le numéro de chambre 
         return "Chambre ".$this->getNumRoom();
     }
-
-
     
 
 // GETTERS ET SETTERS

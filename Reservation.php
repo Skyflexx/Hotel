@@ -8,6 +8,7 @@ Class Reservation{
     private Datetime $begin; //date de début de résa
     private Datetime $end; // date de fin de la résa
     private array $period;
+    private string $id;
 
     public function __construct(Room $room, Client $client, string $begin, string $end){
 
@@ -16,7 +17,8 @@ Class Reservation{
         $this->begin = new Datetime ($begin);
         $this->end = new Datetime ($end);
         $this->period = array (); // Tableau vide qui contiendra la période de réservation (chaque jour sous forme de date dans un tableau)
-        $hotel = $room->getHotel(); // Récupération de l'objet Hotel depuis Room (construct). Car une réservation se fait qu'avec une chambre et un client. L'hotel est tacitement lié.       
+        $hotel = $room->getHotel(); // Récupération de l'objet Hotel depuis Room (construct). Car une réservation se fait qu'avec une chambre et un client. L'hotel est tacitement lié.   
+        $this->id = uniqid();    
 
         // Méthodes pour éviter les doublons pour une chambre :
         $this->addPeriod(); // Ajout de la période de réservation.
@@ -25,8 +27,12 @@ Class Reservation{
     } 
     
     public function delResa(){
-        // $this->getRoom()->delResa($this);  
-        $this->getClient()->delResa($this);      
+       
+        $this->getRoom()->delResa($this);
+        $this->getClient()->delResa($this);
+        $this->room->getHotel()->delResa($this);
+        
+      
     }
 
     public function addPeriod(){
@@ -159,6 +165,20 @@ Class Reservation{
     public function setPeriod($period)
     {
         $this->period = $period;
+
+        return $this;
+    }
+
+   
+    public function getId()
+    {
+        return $this->id;
+    }
+
+   
+    public function setId($id)
+    {
+        $this->id = $id;
 
         return $this;
     }

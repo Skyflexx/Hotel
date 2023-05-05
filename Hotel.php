@@ -29,6 +29,15 @@ class Hotel {
     public function addResa($reservation){
         $this->reservations[] = $reservation; // Ajout de la réservation (Hotel, chambre, client) à ce tableau ce qui permettra de sortir toutes les resa de l'hotel.
     }
+
+    public function delResa($reservation){        
+        
+        $key = array_search($reservation, $this->reservations); // Cherche la clé de l'array Reservations de cette reservation
+        
+        unset($this->reservations[$key]); // Permet de supprimer l'item de l'array avec la clé concernée.
+
+        $this->available = true;  
+    }
   
 
     public function addRoom($room){

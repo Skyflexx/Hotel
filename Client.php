@@ -22,17 +22,13 @@ class Client {
         $this->reservations[] = $reservation; // Ajout de la réservation (Hotel, chambre, client) à ce tableau ce qui permettra de sortir toutes les resa de ce Client.
     }   
 
-    public function delResa($reservation){
-
-        var_dump($reservation);
-        $key = array_search($reservation, $this->reservations); // Cherche la clé de cette reservation
-        var_dump($key);
-        // unset($this->reservations[$key]);
-
+    public function delResa($reservation){   // Fonctionnel. Il faut actualiser l'affichage now;     
         
+        $key = array_search($reservation, $this->reservations); // Cherche la clé de l'array Reservations de cette reservation
+        
+        unset($this->reservations[$key]); // Permet de supprimer l'item de l'array avec la clé concernée.   
         
     }
-
    
     public function getReservationsList(){   // Sort toutes les infos des réservations de ce client.
         
@@ -55,7 +51,7 @@ class Client {
             $dateBegin = $reservation->getBegin()->format("Y-m-d"); // Récupération de la date de début de la resa
             $dateEnd = $reservation->getEnd()->format("Y-m-d"); // Récupération de la date de fin
 
-            $infos .= $reservation->getRoom()->getHotel()." / ".$reservation->getroom()." (".$reservation->getroom()->getNbrBed()." lits - ".$reservation->getroom()->getPrice(). " € - Wifi : ".$reservation->getroom()->getStatutwifi().") - "."Du : $dateBegin au $dateEnd <br>"; 
+            $infos .= $reservation->getRoom()->getHotel()." / ".$reservation->getRoom()." (".$reservation->getRoom()->getNbrBed()." lits - ".$reservation->getRoom()->getPrice(). " € - Wifi : ".$reservation->getRoom()->getStatutwifi().") - "."Du : $dateBegin au $dateEnd <br>"; 
             
             $priceTotal += $reservation->calculPrice(); // Appel de la fct calculPrice de l'objet Reservation qui calcule en fct du nbr de jours passés.
         }
