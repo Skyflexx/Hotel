@@ -134,7 +134,7 @@ class Hotel {
             if ($room->getAvailable()){
                 $availability = "<span class='label label-success'>Disponible !</span>";
             } else {
-                $availability = "<span class='label label-danger'>Réservée</span>";
+                $availability = $room->listOfResas();
             }
 
             // Afichage du contenu dans un tableau bootstrap.

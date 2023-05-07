@@ -62,7 +62,10 @@
         echo $client1->getReservationsList();  
 
         echo $hilton->getStatutRoom(); 
-        
+
+        $resa3->delResa();
+
+        echo $hilton->getStatutRoom();         
 
     ?>    
 

@@ -35,24 +35,43 @@ class Room{
         
         $key = array_search($reservation, $this->reservations); // Cherche la clé de l'array Reservations de cette reservation
         
-        unset($this->reservations[$key]); // Permet de supprimer l'item de l'array avec la clé concernée.
-
-        $this->available = true;        
+        unset($this->reservations[$key]); // Permet de supprimer l'item de l'array avec la clé concernée.  
         
+        if (empty($this->reservations)){
+            $this->available = true;
+        }
+        
+    }
+
+    public function listOfResas(){
+
+        $infos = "<span class='label label-danger '>Indisponible pour la/les période(s) suivante(s) : </span><br>";
+
+        foreach ($this->reservations as $reservation){
+
+            $dateBegin = $reservation->getBegin()->format("Y-m-d"); // Récupération de la date de début de la resa
+            $dateEnd = $reservation->getEnd()->format("Y-m-d"); // Récupération de la date de fin
+
+            $infos .= "<span class='label label-danger'> Du $dateBegin au $dateEnd </span>";      
+            
+        }
+
+        return $infos;
     }
 
     public function changeAvailable(){
         $this->available = false; // Changement automatique du statut dispo si une réservation est faite.    
-    }
+    }    
 
     public function getRoomsStatus(){
         return $this." ".$this->price." € ". "Wifi :".$this->getStatutWifi()." Statut chambre : ".$this->getAvailability();
     }
 
-    public function getAvailability(){
+    public function getAvailability(){        
+
         if ($this->available == true){
             return "Disponible !";
-        } else return "Réservée";
+        } else return "Réservée du ";
     }
 
     public function getStatutwifi(){

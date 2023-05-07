@@ -81,7 +81,6 @@ Class Reservation{
             $this->room->changeAvailable(); 
 
         } else {
-
             echo "Impossible de réserver !";
         }
 
