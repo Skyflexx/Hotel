@@ -22,8 +22,7 @@ class Room{
         $this->reservations = array(); // Ce tableau contiendra tous les items de type réservation(hotel1, chambre1, client1) permettant de sortir toutes les résas de cette chambre précise.
         $hotel->addRoom($this); // Appel de la fct AddRoom qui permettra d'ajouter cette chambre à la liste de l'hotel concerné.       
 
-    }      
-   
+    }         
 
     public function addResa($reservation){  
 

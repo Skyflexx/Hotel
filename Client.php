@@ -7,11 +7,9 @@ class Client {
     private array $reservations;
 
     public function __construct(string $firstname, string $lastname){
-
         $this->firstname = $firstname;
         $this->lastname = $lastname;
         $this->reservations = array(); // Ce tableau sera incrémenté pour lister les résas de cette personne. Il contiendra une resa (hotel, chambre, client)
-
     }
 
     public function __tostring(){
@@ -26,8 +24,7 @@ class Client {
         
         $key = array_search($reservation, $this->reservations); // Cherche la clé de l'array Reservations de cette reservation
         
-        unset($this->reservations[$key]); // Permet de supprimer l'item de l'array avec la clé concernée.   
-        
+        unset($this->reservations[$key]); // Permet de supprimer l'item de l'array avec la clé concernée.           
     }
    
     public function getReservationsList(){   // Sort toutes les infos des réservations de ce client.
@@ -59,7 +56,6 @@ class Client {
         $infos .= "Total : $priceTotal €";
 
         return $infos;
-
     }
 
 
