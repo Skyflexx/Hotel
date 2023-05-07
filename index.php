@@ -11,7 +11,6 @@
 </head>
 <body>
 <h2>
-
     <?php 
 
         spl_autoload_register(function ($class_name) {
@@ -37,9 +36,8 @@
         $resa2 = new Reservation ($room1, $client1, "03/14/2021", "03/18/2021"); // Ne sera pas prise en compte grace à la méthode qui check si la chambre est dispo.
         $resa3 = new Reservation ($room1, $client1, "03/19/2021", "03/20/2021");
         // $resa3 = new Reservation ($room2, $client2, "01/01/2021", "01/01/2021");
-        // $resa4 = new Reservation ($room2, $client2, "01/02/2021", "01/03/2021");      
+        // $resa4 = new Reservation ($room2, $client2, "01/02/2021", "01/03/2021");     
         
-
         // Tests des fonctions
 
         echo $hilton->getInfosHotel();
@@ -69,9 +67,7 @@
 
     ?>    
 
-    </h2>
-
-    
+</h2>    
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

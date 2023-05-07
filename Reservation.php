@@ -1,8 +1,7 @@
 <?php 
 
 Class Reservation{
-
-    
+        
     private Room $room;
     private Client $client;
     private Datetime $begin; //date de début de résa
@@ -11,7 +10,6 @@ Class Reservation{
     private string $id;
 
     public function __construct(Room $room, Client $client, string $begin, string $end){
-
         $this->room = $room;
         $this->client = $client;
         $this->begin = new Datetime ($begin);
@@ -19,11 +17,9 @@ Class Reservation{
         $this->period = array (); // Tableau vide qui contiendra la période de réservation (chaque jour sous forme de date dans un tableau)
         $hotel = $room->getHotel(); // Récupération de l'objet Hotel depuis Room (construct). Car une réservation se fait qu'avec une chambre et un client. L'hotel est tacitement lié.   
         $this->id = uniqid();    
-
         // Méthodes pour éviter les doublons pour une chambre :
         $this->addPeriod(); // Ajout de la période de réservation.
-        $this->ifPossibleResa(); // Si la période de réservation n'empiete pas sur une autre, alors on réserve.        
-              
+        $this->ifPossibleResa(); // Si la période de réservation n'empiete pas sur une autre, alors on réserve.             
     } 
     
     public function delResa(){
@@ -32,8 +28,7 @@ Class Reservation{
         $this->getClient()->delResa($this);
         $this->room->getHotel()->delResa($this);
 
-        return  "echo $"."hilton->getStatutRoom();"; // Ecrit une ligne de code permettant d'afficher à nouveau le tableau des réservations de l'hotel.        
-      
+        return  "echo $"."hilton->getStatutRoom();"; // Ecrit une ligne de code permettant d'afficher à nouveau le tableau des réservations de l'hotel.       
     }
 
     public function addPeriod(){
@@ -48,8 +43,7 @@ Class Reservation{
             $this->period[] = $date->format('Y-m-d');  // l' array qui contiendra la période de réservation. Chaque jour sous forme de date dans un item du tableau.      
         }     
         
-        $this->period[] = $this->end->format('Y-m-d');   // Ajout de la date de fin qui n'est pas incluse automatiquement par la classe DatePeriod.     
-
+        $this->period[] = $this->end->format('Y-m-d');   // Ajout de la date de fin qui n'est pas incluse automatiquement par la classe DatePeriod.    
     } 
 
     public function ifPossibleResa(){ 
@@ -83,7 +77,6 @@ Class Reservation{
         } else {
             echo "Impossible de réserver !";
         }
-
     }
 
     public function calculPrice(){ // Calcul du prix d'une resa en partant du nbr de jours réservés. 
